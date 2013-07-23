@@ -1,0 +1,6 @@
+export FACEBOOK_KEY = 480021948758501
+export FACEBOOK_SECRET = aca820b4ee6a70419a6e1e5d8e7cbf0f
+
+ENV is array of bash variables
+ENV['FACEBOOK_KEY']
+ENV['FACEBOOK_SECRET']
