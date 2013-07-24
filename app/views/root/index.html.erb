@@ -5,6 +5,11 @@
   <head>
   </head>
   <body>
+  	<% if user_signed_in? %>
+	  	<div> <%= current_user.name %> </div>
+  	<% else %>
+  		<div><%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %></div>
+  	<% end %>
     <div id="map-canvas"></div>
   </body>
 </html>
