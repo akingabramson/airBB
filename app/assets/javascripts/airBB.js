@@ -1,52 +1,62 @@
-var map;
+window.AB = {
+  Models: {},
+  Collections: {},
+  Views: {},
+  Routers: {}
+}
 
-function initialize() {
+AB.initialize = function() {
+
   var mapOptions = {
-    zoom: 6,
+    zoom: 12,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
-  map = new google.maps.Map(document.getElementById('map-canvas'),
+  AB.map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
 
   // Try HTML5 geolocation
   if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = new google.maps.LatLng(position.coords.latitude,
+      AB.pos = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);
 
-      var infowindow = new google.maps.InfoWindow({
-        map: map,
-        position: pos,
-        content: 'Location found using HTML5.'
-      });
-
-      map.setCenter(pos);
+      AB.map.setCenter(AB.pos);
     }, function() {
-      handleNoGeolocation(true);
+      AB.handleNoGeolocation(true);
     });
     
 
   } else {
     // Browser doesn't support Geolocation
-    handleNoGeolocation(false);
+    AB.handleNoGeolocation(false);
   }
 
-  loadMarkers();
+  AB.loadMarkers();
+
+  google.maps.event.addListener(AB.marker, 'click', function() {
+    alert("yo");
+    var infowindow = new google.maps.InfoWindow({
+      map: AB.map,
+      position: AB.pos,
+      content: 'Current ballers:'
+      });
+    AB.map.setCenter(AB.marker.getPosition());
+  });
 
 }
 
-function loadMarkers() {
+AB.loadMarkers = function() {
   console.log("here")
   var newPos = new google.maps.LatLng(37.7811588, -122.41146719999999);
   // load different image based on size?
-  var marker = new google.maps.Marker({
+  AB.marker = new google.maps.Marker({
     position: newPos,
-    map: map,
+    map: AB.map,
     title: "Hello World!"
   })
 }
 
-function handleNoGeolocation(errorFlag) {
+AB.handleNoGeolocation = function(errorFlag) {
   if (errorFlag) {
     var content = 'Error: The Geolocation service failed.';
   } else {
@@ -54,13 +64,17 @@ function handleNoGeolocation(errorFlag) {
   }
 
   var options = {
-    map: map,
+    map: AB.map,
     position: new google.maps.LatLng(60, 105),
     content: content
   };
 
   var infowindow = new google.maps.InfoWindow(options);
-  map.setCenter(options.position);
+  AB.map.setCenter(options.position);
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+$(function(){
+  AB.initialize();
+});
+
+// google.maps.event.addDomListener(window, 'load', AB.initialize);

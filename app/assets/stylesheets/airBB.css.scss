@@ -1,0 +1,16 @@
+#map-canvas {
+	height: 100%;
+	width: 100%;
+}
+
+.map-container {
+	height: 450px;
+	width: 400px;
+}
+
+#new-court {
+	position: relative;
+	left: 42%;
+	top: 30px;
+	z-index: 999;
+}
