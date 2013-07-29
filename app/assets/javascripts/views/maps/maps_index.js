@@ -13,6 +13,7 @@ AB.Views.Main = Backbone.View.extend({
   },
 
   showNewCourtForm: function() {
-  	this.courtFormView.$el.toggleClass("hidden");
+  	// this.courtFormView.$el.toggleClass("hidden");
+  	$("#new-court-form").toggle("highlight");
   }
 });
