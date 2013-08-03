@@ -16,7 +16,6 @@ AB.Routers.Main = Backbone.Router.extend({
 		this.currentView = newView;
 
 		this.$content.html(this.currentView.render().$el);
-		console.log(this.$content)
 
 	}
 });

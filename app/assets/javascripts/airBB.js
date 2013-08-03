@@ -2,7 +2,8 @@ window.AB = {
   Models: {},
   Collections: {},
   Views: {},
-  Routers: {}
+  Routers: {},
+  Store: {}
 }
 
 AB.initialize = function() {

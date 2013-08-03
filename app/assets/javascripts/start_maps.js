@@ -62,10 +62,10 @@ AB.handleNoGeolocation = function(errorFlag) {
 
 AB.loadMarkers = function() {
   console.log("markers loading")
-  var newPos = new google.maps.LatLng(37.7811588, -122.41146719999999);
+  // var newPos = new google.maps.LatLng(37.7811588, -122.41146719999999);
   // load different image based on size?
   AB.marker = new google.maps.Marker({
-    position: newPos,
+    position: AB.pos,
     map: AB.map,
     title: "Hello World!"
   })

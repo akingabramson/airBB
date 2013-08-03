@@ -5,8 +5,10 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
     <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmvWtzGkXk7HeIcQEgRYV9qQRuh1uYY4k&sensor=true">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmvWtzGkXk7HeIcQEgRYV9qQRuh1uYY4k&libraries=places&sensor=true">
     </script>
+
+
     <%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery? %>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
