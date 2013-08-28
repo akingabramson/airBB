@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130723211423) do
+ActiveRecord::Schema.define(:version => 20130804001034) do
+
+  create_table "courts", :force => true do |t|
+    t.string   "name"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "courts", ["latitude"], :name => "index_courts_on_latitude"
+  add_index "courts", ["longitude"], :name => "index_courts_on_longitude"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

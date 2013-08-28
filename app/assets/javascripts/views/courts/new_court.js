@@ -48,7 +48,7 @@ AB.Views.NewCourt = Backbone.View.extend({
 	},
 
 	courtError: function(message) {
-		
+		alert("ERROR");
 	}
 
 

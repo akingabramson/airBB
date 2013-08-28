@@ -6,9 +6,13 @@ AB.Routers.Main = Backbone.Router.extend({
 		this.$content = options.$content
 	},
 	main: function(){
-		var mainView = new AB.Views.Main();
-
-		this._swapView(mainView);
+		AB.startMap();
+		var markersCollection = 
+		AB.Store.mainView = new AB.Views.Main({el: this.$content});
+		AB.Store.mainView.addNewCourtForm()
+		this.currentView && this.currentView.remove();
+		this.currentView = AB.Store.mainView;
+		
 	},
 
 	_swapView: function(newView) {
