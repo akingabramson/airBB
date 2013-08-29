@@ -16,8 +16,9 @@ class Court < ActiveRecord::Base
     
     # p southwest
 
-    Court.find_by_sql([query, southwest[:latitude], northeast[:latitude],
-                               southwest[:longitude], northeast[:longitude]])
+    # Court.where(:latitude => )
+    Court.find_by_sql([query, southwest[:latitude].to_f, northeast[:latitude].to_f,
+                               southwest[:longitude].to_f, northeast[:longitude].to_f])
 
   end
 

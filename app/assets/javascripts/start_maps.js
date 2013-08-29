@@ -16,30 +16,33 @@ AB.checkGeo = function() {
 	if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       AB.pos = new google.maps.LatLng(position.coords.latitude,
-                                       position.coords.longitude);
+                                      position.coords.longitude);
 
       AB.map.setCenter(AB.pos);
+      AB.Router.loadMain();
     }, function() {
       AB.handleNoGeolocation(true);
+      AB.Router.loadMain();
     });
     
 
   } else {
     // Browser doesn't support Geolocation
     AB.handleNoGeolocation(false);
+    AB.Router.loadMain();
   }
 
-  AB.loadMarkers();
+  // AB.loadMarkers();
 
-  google.maps.event.addListener(AB.marker, 'click', function() {
-    alert("yo");
-    var infowindow = new google.maps.InfoWindow({
-      map: AB.map,
-      position: AB.pos,
-      content: 'Current ballers:'
-      });
-    AB.map.setCenter(AB.marker.getPosition());
-  });
+  // google.maps.event.addListener(AB.marker, 'click', function() {
+  //   alert("yo");
+  //   var infowindow = new google.maps.InfoWindow({
+  //     map: AB.map,
+  //     position: AB.pos,
+  //     content: 'Current ballers:'
+  //     });
+  //   AB.map.setCenter(AB.marker.getPosition());
+  // });
 }
 
 AB.handleNoGeolocation = function(errorFlag) {

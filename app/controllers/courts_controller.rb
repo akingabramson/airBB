@@ -1,6 +1,7 @@
 class CourtsController < ApplicationController
   def index
-    @courts = Court.find_by_direction(params[:sw], params[:ne])
+    @courts = Court.find_by_direction(params[:southwest], params[:northeast])
+    render :json => @courts
 
   end
 

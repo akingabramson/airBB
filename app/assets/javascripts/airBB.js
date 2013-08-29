@@ -6,7 +6,7 @@ window.AB = {
   Store: {}
 }
 
-AB.initialize = function() {  
+AB.initialize = function() {
   AB.Router = new AB.Routers.Main({$content: $(".map-container")})
   Backbone.history.start();
   // AB.startMap();  

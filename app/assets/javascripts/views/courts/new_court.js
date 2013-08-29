@@ -21,8 +21,10 @@ AB.Views.NewCourt = Backbone.View.extend({
 	},
 
 	submitCourt: function() {
+		// refactor to use models
 		var courtName = $("#court-name").val();
 		var courtAddress = $("#court-address").val();
+		// Add number of courts per court location? (3 at wooden)?
 		var courtLatLong = this.autocomplete.getPlace().geometry.location;
 		var courtLat = courtLatLong.lat();
 		var courtLng = courtLatLong.lng();
