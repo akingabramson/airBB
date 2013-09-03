@@ -5,7 +5,14 @@ AB.Views.Main = Backbone.View.extend({
   },
 
   initialize: function() {
-    google.maps.event.addListener(AB.map, "dragend", this.updateCollection.bind(this));
+    this.dragID = google.maps.event.addListener(AB.map, "drag", this.updateLoop.bind(this));
+
+    var mainView = this;
+    google.maps.event.addListener(AB.map, "dragend", function() {
+      setTimeout(mainView.updateCollection.bind(mainView), 200);
+      clearInterval(mainView.interval);
+      mainView.dragID = google.maps.event.addListener(AB.map, "drag", mainView.updateLoop.bind(mainView));
+    });
   },
 
   addNewCourtForm: function() {
@@ -20,14 +27,29 @@ AB.Views.Main = Backbone.View.extend({
     this.courtFormView.setUpAutoComplete();
   },
 
+  updateLoop: function() {
+    console.log(this.dragID)
+    google.maps.event.removeListener(this.dragID);
+
+    var mainView = this;
+    this.interval = setInterval(function(){
+      mainView.updateCollection()
+      }, 1000);
+    
+  },
+
   updateCollection: function() {
     var bounds = AB.Store.getBounds()
+    var view = this;
     this.collection.fetch({
       data: {
         southwest: bounds[0],
         northeast: bounds[1]
       },
-      success: this.collection.reset.bind(this.collection),
+      reset: true,
+      success: function(){
+        console.log(view.collection)
+      },
       error: function() {
         alert("couldn't update");
       }

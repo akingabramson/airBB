@@ -1,4 +1,8 @@
-export FACEBOOK_KEY=480021948758501
-export FACEBOOK_SECRET=aca820b4ee6a70419a6e1e5d8e7cbf0f
+Heroku commands:
+heroku export FACEBOOK_KEY=480021948758501
+heroku export FACEBOOK_SECRET=aca820b4ee6a70419a6e1e5d8e7cbf0f
+
+
+Rails variables:
 ENV['FACEBOOK_KEY']
 ENV['FACEBOOK_SECRET']
