@@ -23,26 +23,13 @@ AB.checkGeo = function() {
     }, function() {
       AB.handleNoGeolocation(true);
       AB.Router.loadMain();
-    });
-    
+    }); 
 
   } else {
     // Browser doesn't support Geolocation
     AB.handleNoGeolocation(false);
     AB.Router.loadMain();
   }
-
-  // AB.loadMarkers();
-
-  // google.maps.event.addListener(AB.marker, 'click', function() {
-  //   alert("yo");
-  //   var infowindow = new google.maps.InfoWindow({
-  //     map: AB.map,
-  //     position: AB.pos,
-  //     content: 'Current ballers:'
-  //     });
-  //   AB.map.setCenter(AB.marker.getPosition());
-  // });
 }
 
 AB.handleNoGeolocation = function(errorFlag) {
@@ -60,16 +47,4 @@ AB.handleNoGeolocation = function(errorFlag) {
 
   var infowindow = new google.maps.InfoWindow(options);
   AB.map.setCenter(options.position);
-}
-
-
-AB.loadMarkers = function() {
-  console.log("markers loading")
-  // var newPos = new google.maps.LatLng(37.7811588, -122.41146719999999);
-  // load different image based on size?
-  AB.marker = new google.maps.Marker({
-    position: AB.pos,
-    map: AB.map,
-    title: "Hello World!"
-  })
 }

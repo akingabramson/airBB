@@ -16,6 +16,12 @@ AB.Models.Court = Backbone.Model.extend({
       icon: image,
       animation: google.maps.DROP
     });
+		var court = this;
+
+    this.markerClickID = google.maps.event.addListener(this.positionMarker, "click", function(){
+    	AB.Router.navigate("courts/"+court.id, {trigger: true});
+    });
+
 	},
 	parse: function(jsonData){
 		this.position = new google.maps.LatLng(jsonData.latitude, jsonData.longitude);

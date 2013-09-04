@@ -6,7 +6,6 @@ AB.Views.Main = Backbone.View.extend({
 
   initialize: function() {
     this.dragID = google.maps.event.addListener(AB.map, "drag", this.updateLoop.bind(this));
-
     var mainView = this;
     google.maps.event.addListener(AB.map, "dragend", function() {
       setTimeout(mainView.updateCollection.bind(mainView), 200);
@@ -16,7 +15,8 @@ AB.Views.Main = Backbone.View.extend({
   },
 
   addNewCourtForm: function() {
-  	this.courtFormView = new AB.Views.NewCourt();
+  	this.courtFormView && this.courtFormView.remove();
+    this.courtFormView = new AB.Views.NewCourt();
   	this.$el.prepend(this.courtFormView.render().$el);
   	return this;
   },
@@ -30,12 +30,10 @@ AB.Views.Main = Backbone.View.extend({
   updateLoop: function() {
     console.log(this.dragID)
     google.maps.event.removeListener(this.dragID);
-
     var mainView = this;
     this.interval = setInterval(function(){
-      mainView.updateCollection()
-      }, 1000);
-    
+        mainView.updateCollection()
+    }, 1000);
   },
 
   updateCollection: function() {
