@@ -1,5 +1,6 @@
 AB.Store.swapButtonText = function() {
 	var $button = $("#new-court-button");
+	console.log("swapping button");
 	if (AB.Store.buttonClicked) {
     $button.html("New Court");
   } else {
@@ -12,11 +13,16 @@ AB.Store.swapButtonText = function() {
 AB.Store.getBounds = function() {
 	var southwestArr = _.map(AB.map.getBounds().getSouthWest().toUrlValue().split(","), function(pos){return parseFloat(pos)});
 	var northeastArr = _.map(AB.map.getBounds().getNorthEast().toUrlValue().split(","), function(pos){return parseFloat(pos)});
-
-
 	var southwest = {latitude: southwestArr[0], longitude: southwestArr[1]};
 	var northeast = {latitude: northeastArr[0], longitude: northeastArr[1]};
 
 	return [southwest, northeast]
+};
+
+AB.Store.backToMain = function(view){
+	console.log("back to main")
+	view.$el.fadeToggle("fast");
+	AB.Store.swapButtonText();
+	AB.Router.navigate("", {trigger: true});
 }
 

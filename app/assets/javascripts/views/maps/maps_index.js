@@ -1,7 +1,7 @@
 AB.Views.Main = Backbone.View.extend({
   template: JST['maps/index'],
   events: {
-    "click #new-court-button": "showNewCourtForm",
+    // "click #new-court-button": "showNewCourtForm",
   },
 
   initialize: function() {
@@ -14,17 +14,8 @@ AB.Views.Main = Backbone.View.extend({
     });
   },
 
-  addNewCourtForm: function() {
-  	this.courtFormView && this.courtFormView.remove();
-    this.courtFormView = new AB.Views.NewCourt();
-  	this.$el.prepend(this.courtFormView.render().$el);
-  	return this;
-  },
-
   showNewCourtForm: function() {
-    AB.Store.swapButtonText();
-  	this.$el.find("#new-court-div").fadeToggle("fast");
-    this.courtFormView.setUpAutoComplete();
+    // AB.Router.navigate("courts/new", {trigger: true});
   },
 
   updateLoop: function() {

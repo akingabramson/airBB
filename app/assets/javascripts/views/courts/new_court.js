@@ -21,7 +21,7 @@ AB.Views.NewCourt = Backbone.View.extend({
 	},
 
 	submitCourt: function() {
-		// refactor to use models
+		// refactor to use models and Serialize JSON
 		var courtName = $("#court-name").val();
 		var courtAddress = $("#court-address").val();
 		// Add number of courts per court location? (3 at wooden)?
