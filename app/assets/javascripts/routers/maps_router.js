@@ -5,12 +5,21 @@ AB.Routers.Main = Backbone.Router.extend({
 		"courts/:id": "show",
 	},
 	initialize: function(options) {
-		this.$content = options.$content, this.$newCourtButton = options.$newCourtButton;
+		this.$mapContainer = options.$mapContainer, this.$newCourtButton = options.$newCourtButton,
+		this.$content = options.$content;
+		this.$newCourtButton.on("click", this._flipContent.bind(this));
 	},
-	// add link back to main again?
-	main: function(){
-		this.$newCourtButton.off("click");
 
+	_flipContent: function(){
+		if (this.currentView) {
+			this._swapView(false);
+			this.navigate("", {trigger: true});
+		} else {
+			this.navigate("courts/new", {trigger:true});
+		}
+	},
+	
+	main: function(){
 		if (!!AB.map) {
 			this.loadMain();
 		} else {
@@ -19,26 +28,19 @@ AB.Routers.Main = Backbone.Router.extend({
 	},
 
 	show: function(id) {
-		alert("here");
-		var that = this;
-		console.log(that.markersCollection.get(id));
-		var showView = new AB.Views.ShowCourt({el: this.$content.find("#court-show")})
+
+		console.log(this.markersCollection.get(id));
+		var showView = new AB.Views.ShowCourt({model: this.content})
 		this._swapView(showView);
 		// start the view and stuff
 	},
 
 	newCourt: function() {
-		this.$newCourtButton.off("click");
-		// test whether we need
-
 		if (!this.courtFormView) {
 			this.courtFormView = new AB.Views.NewCourt();
-			this.$content.prepend(this.courtFormView.render().$el);
-			this.courtFormView.setUpAutoComplete();
 		}
-		this.courtFormView.$el.fadeToggle("fast");
-		this.$newCourtButton.on("click", AB.Store.backToMain.bind(AB.Store, this.courtFormView));
-		AB.Store.swapButtonText();
+		this._swapView(this.courtFormView);
+		this.courtFormView.setUpAutoComplete();
 	},
 
 	// called after map loads on main view
@@ -50,7 +52,7 @@ AB.Routers.Main = Backbone.Router.extend({
 			this.markersCollection = new AB.Collections.Courts();		
 			this.markersCollection.fetch({
 				success: function(){
-					router.mainView = new AB.Views.Main({el: router.$content, collection: router.markersCollection});
+					router.mainView = new AB.Views.Main({el: router.$mapContainer, collection: router.markersCollection});
 				},
 				error: function(thing) {
 					console.log(thing);
@@ -61,15 +63,19 @@ AB.Routers.Main = Backbone.Router.extend({
 				}
 			});
 		}
-
-		this.$newCourtButton.on("click", function(){router.navigate("courts/new", {trigger:true})})
 	},
 
 	_swapView: function(newView) {
-		this.currentView && this.currentView.remove();
-		this.currentView = newView;
-
-		this.$content.html(this.currentView.render().$el);
-
+		// fades in a new view, or fades out old view
+		if (newView) {
+			this.currentView = newView;
+			this.$content.html(this.currentView.render().$el)
+			this.$content.fadeToggle("fast");
+		} else {
+			this.$content.fadeToggle("fast");
+			this.currentView.remove();
+			this.currentView = false;
+		}
+		AB.Store.swapButtonText();
 	}
 });

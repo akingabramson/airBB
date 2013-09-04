@@ -1,21 +1,18 @@
 AB.Views.Main = Backbone.View.extend({
   template: JST['maps/index'],
   events: {
-    // "click #new-court-button": "showNewCourtForm",
   },
 
   initialize: function() {
     this.dragID = google.maps.event.addListener(AB.map, "drag", this.updateLoop.bind(this));
     var mainView = this;
+
+    // stop refreshing courts once you stop dragging
     google.maps.event.addListener(AB.map, "dragend", function() {
       setTimeout(mainView.updateCollection.bind(mainView), 200);
       clearInterval(mainView.interval);
       mainView.dragID = google.maps.event.addListener(AB.map, "drag", mainView.updateLoop.bind(mainView));
     });
-  },
-
-  showNewCourtForm: function() {
-    // AB.Router.navigate("courts/new", {trigger: true});
   },
 
   updateLoop: function() {
@@ -35,14 +32,13 @@ AB.Views.Main = Backbone.View.extend({
         southwest: bounds[0],
         northeast: bounds[1]
       },
-      reset: true,
+      // reset: true,
       success: function(){
         console.log(view.collection)
       },
       error: function() {
         alert("couldn't update");
       }
-      // bind it?
     });
   }
 });

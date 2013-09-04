@@ -1,6 +1,5 @@
 AB.Store.swapButtonText = function() {
 	var $button = $("#new-court-button");
-	console.log("swapping button");
 	if (AB.Store.buttonClicked) {
     $button.html("New Court");
   } else {
@@ -20,7 +19,6 @@ AB.Store.getBounds = function() {
 };
 
 AB.Store.backToMain = function(view){
-	console.log("back to main")
 	view.$el.fadeToggle("fast");
 	AB.Store.swapButtonText();
 	AB.Router.navigate("", {trigger: true});
