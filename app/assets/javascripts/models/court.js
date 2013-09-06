@@ -7,7 +7,7 @@ AB.Models.Court = Backbone.Model.extend({
 	    // The origin for this image is 0,0.
 	    origin: new google.maps.Point(0,0),
 	    // The anchor for this image is the base of the flagpole at 0,32.
-	    anchor: new google.maps.Point(0, 0)
+	    anchor: new google.maps.Point(13, 13)
 	  };
 
 		this.positionMarker = new google.maps.Marker({
@@ -25,6 +25,10 @@ AB.Models.Court = Backbone.Model.extend({
 	},
 	parse: function(jsonData){
 		this.position = new google.maps.LatLng(jsonData.latitude, jsonData.longitude);
+		_.each(jsonData.check_ins, function(checkIn){
+			var time = new Date(checkIn.created_at).toLocaleTimeString()
+			checkIn.created_at = time.slice(0,4) + time.slice(7,10);;
+		});
 		return jsonData
   },
 });

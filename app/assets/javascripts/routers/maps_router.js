@@ -9,15 +9,6 @@ AB.Routers.Main = Backbone.Router.extend({
 		this.$content = options.$content;
 		this.$newCourtButton.on("click", this._flipContent.bind(this));
 	},
-
-	_flipContent: function(){
-		if (this.currentView) {
-			this._swapView(false);
-			this.navigate("", {trigger: true});
-		} else {
-			this.navigate("courts/new", {trigger:true});
-		}
-	},
 	
 	main: function(){
 		if (!!AB.map) {
@@ -28,11 +19,17 @@ AB.Routers.Main = Backbone.Router.extend({
 	},
 
 	show: function(id) {
-
-		console.log(this.markersCollection.get(id));
-		var showView = new AB.Views.ShowCourt({model: this.content})
-		this._swapView(showView);
-		// start the view and stuff
+		var router = this;
+		var court = this.markersCollection.get(id);
+		court.fetch({
+			success: function() {
+				var showView = new AB.Views.ShowCourt({model:court})
+				router._swapView(showView);
+			},
+			error: function() {
+				
+			}
+		})
 	},
 
 	newCourt: function() {
@@ -62,6 +59,16 @@ AB.Routers.Main = Backbone.Router.extend({
 					northeast: northeast
 				}
 			});
+		}
+	},
+
+
+	_flipContent: function(){
+		if (this.currentView) {
+			this._swapView(false);
+			this.navigate("", {trigger: true});
+		} else {
+			this.navigate("courts/new", {trigger:true});
 		}
 	},
 

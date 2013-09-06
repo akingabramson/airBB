@@ -1,1 +1,9 @@
-<h2> Showin</h2>
+<h2><%=court.escape("name")%></h2>
+<h3>Current Ballers: </h3>
+<h4> Checked In Ballers</h4>
+<% console.log(court) %>
+<ul>
+<% _.each(court.get("check_ins"), function(checkIn){ %>
+	<li>Name: <%=checkIn.checked_in_baller.name%> | Checked in at: <%=checkIn.created_at%></li>			
+<% }); %>
+</ul>

@@ -16,5 +16,12 @@ class CourtsController < ApplicationController
     end
   end
 
+  def show
+    @court = Court.find(params[:id]);
+    @users = @court.checked_in_users
+    render 'show.rabl'
+    # use rabl
+  end
+
 
 end
