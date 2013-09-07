@@ -25,9 +25,9 @@ AB.Models.Court = Backbone.Model.extend({
 	},
 	parse: function(jsonData){
 		this.position = new google.maps.LatLng(jsonData.latitude, jsonData.longitude);
-		_.each(jsonData.check_ins, function(checkIn){
-			var time = new Date(checkIn.created_at).toLocaleTimeString()
-			checkIn.created_at = time.slice(0,4) + time.slice(7,10);;
+		_.each(jsonData.current_ballers, function(baller){
+			var time = new Date(baller.checked_in_at).toLocaleTimeString()
+			baller.checked_in_at = time.slice(0,4) + time.slice(7,10);;
 		});
 		return jsonData
   },

@@ -25,7 +25,7 @@ class Court < ActiveRecord::Base
 
   def current_ballers
     query = <<-SQL
-      SELECT users.* 
+      SELECT users.id, users.name, check_ins.created_at AS checked_in_at
       FROM users
       INNER JOIN check_ins 
       ON users.id = check_ins.user_id
@@ -33,7 +33,7 @@ class Court < ActiveRecord::Base
       AND NOT expired
     SQL
 
-    Court.find_by_sql([query, id])
+    User.find_by_sql([query, id])
   end
 
   def baller_count

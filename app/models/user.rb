@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :omniauthable, :omniauth_providers => [:facebook]
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  attr_accessible :provider, :uid, :name, :password, :email
+  attr_accessible :provider, :uid, :name, :password, :email, :remember_me
   has_many :check_ins
 
   def self.find_for_facebook_oauth(auth, signed_in_resource = nil)

@@ -1,19 +1,30 @@
 class CheckIn < ActiveRecord::Base
   attr_accessible :court_id, :user_id
-  scope :active, where(expired: false)
+  validates :court_id, presence: true
+  validates :user_id, presence: true
 
   before_create :set_expired
 
-  validates :court_id, presence: true
-  validates :user_id, presence: true
-  # validates :expired, presence: true
-
   belongs_to :court
   belongs_to :user
+
+  scope :active, where(expired: false)
 
   def set_expired
     self.expired = false
   end
 
+  def checked_in_baller
+    query = <<-SQL
+      SELECT users.*, check_ins.created_at
+      FROM users
+      INNER JOIN check_ins 
+      ON users.id = check_ins.user_id
+      WHERE check_ins.id = ?
+      AND NOT expired
+    SQL
+
+    CheckIn.find_by_sql([query, id])
+  end
 
 end

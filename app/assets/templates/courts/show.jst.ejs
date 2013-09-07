@@ -1,9 +1,19 @@
 <h2><%=court.escape("name")%></h2>
-<h3>Current Ballers: </h3>
-<h4> Checked In Ballers</h4>
-<% console.log(court) %>
+<% var count = court.escape("baller_count")%>
+<% if (count == 1) { %> 
+	<h3>1 baller</h3>
+<% } else { %>
+	<h3><%=count%> ballers</h3>
+<% } %>
+<h4>Current Ballers</h4>
 <ul>
-<% _.each(court.get("check_ins"), function(checkIn){ %>
-	<li>Name: <%=checkIn.checked_in_baller.name%> | Checked in at: <%=checkIn.created_at%></li>			
+<% _.each(court.get("current_ballers"), function(baller){ %>
+	<li>Name: <%=baller.name%> | Checked in at: <%=baller.checked_in_at%></li>			
 <% }); %>
 </ul>
+
+<% if (AB.Store.CurrentUser.id) { %>
+	<button class="btn check-in-button">Check In</button>
+<% } else { %>
+	<a class="btn sign-in" href="/users/sign_in?redirect_to_path=courts&court_id=<%=court.id%>">Sign In to Check In!</a>
+<% } %>

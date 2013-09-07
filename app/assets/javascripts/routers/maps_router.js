@@ -7,6 +7,7 @@ AB.Routers.Main = Backbone.Router.extend({
 	initialize: function(options) {
 		this.$mapContainer = options.$mapContainer, this.$newCourtButton = options.$newCourtButton,
 		this.$content = options.$content;
+		this.markersCollection = options.markersCollection;
 		this.$newCourtButton.on("click", this._flipContent.bind(this));
 	},
 	
@@ -21,6 +22,9 @@ AB.Routers.Main = Backbone.Router.extend({
 	show: function(id) {
 		var router = this;
 		var court = this.markersCollection.get(id);
+		if (!court) {
+			court = this.markersCollection.push({id: id})
+		}
 		court.fetch({
 			success: function() {
 				var showView = new AB.Views.ShowCourt({model:court})
@@ -46,7 +50,7 @@ AB.Routers.Main = Backbone.Router.extend({
 		if (!this.mainView) {
 			var bounds = AB.Store.getBounds();
 			var southwest = bounds[0], northeast = bounds[1];
-			this.markersCollection = new AB.Collections.Courts();		
+			this.markersCollection = this.markersCollection || new AB.Collections.Courts();		
 			this.markersCollection.fetch({
 				success: function(){
 					router.mainView = new AB.Views.Main({el: router.$mapContainer, collection: router.markersCollection});
