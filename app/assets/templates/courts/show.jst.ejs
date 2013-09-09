@@ -1,5 +1,5 @@
 <h2><%=court.escape("name")%></h2>
-<% var count = court.escape("baller_count")%>
+<% var count = court.get("current_ballers").length%>
 <% if (count == 1) { %> 
 	<h3>1 baller</h3>
 <% } else { %>
@@ -7,13 +7,18 @@
 <% } %>
 <h4>Current Ballers</h4>
 <ul>
-<% _.each(court.get("current_ballers"), function(baller){ %>
-	<li>Name: <%=baller.name%> | Checked in at: <%=baller.checked_in_at%></li>			
+<% court.get("current_ballers").each(function(baller){ %>
+	<%var date = new Date(baller.escape('checked_in_at'));%>
+	<%var goodDate = new Date(date - date.getTimezoneOffset()*60000);%>
 <% }); %>
 </ul>
 
 <% if (AB.Store.CurrentUser.id) { %>
-	<button class="btn check-in-button">Check In</button>
+	<% if (!!checkIn) { %>
+		<button class="btn check-out-button">Check Out</button>
+	<% } else { %>
+		<button class="btn check-in-button">Check In</button>
+	<% } %>
 <% } else { %>
-	<a class="btn sign-in" href="/users/sign_in?redirect_to_path=courts&court_id=<%=court.id%>">Sign In to Check In!</a>
+	<a class="btn sign-in" href="/users/sign_in?redirect_url=/courts/<%=court.id%>">Sign In to Check In!</a>
 <% } %>

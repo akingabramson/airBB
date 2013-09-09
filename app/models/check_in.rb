@@ -3,7 +3,7 @@ class CheckIn < ActiveRecord::Base
   validates :court_id, presence: true
   validates :user_id, presence: true
 
-  before_create :set_expired
+  before_save :set_expired
 
   belongs_to :court
   belongs_to :user
@@ -12,6 +12,7 @@ class CheckIn < ActiveRecord::Base
 
   def set_expired
     self.expired = false
+    true
   end
 
   def checked_in_baller

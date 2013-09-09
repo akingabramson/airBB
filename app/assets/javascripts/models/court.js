@@ -24,11 +24,13 @@ AB.Models.Court = Backbone.Model.extend({
 
 	},
 	parse: function(jsonData){
-		this.position = new google.maps.LatLng(jsonData.latitude, jsonData.longitude);
-		_.each(jsonData.current_ballers, function(baller){
-			var time = new Date(baller.checked_in_at).toLocaleTimeString()
-			baller.checked_in_at = time.slice(0,4) + time.slice(7,10);;
-		});
+		jsonData.position = new google.maps.LatLng(jsonData.latitude, jsonData.longitude);
+		jsonData.current_ballers = new AB.Collections.CurrentBallers(jsonData.current_ballers)
+		// _.each(jsonData.current_ballers, function(baller){
+		// 	var time = new Date(baller.get("checked_in_at")).toLocaleTimeString();
+		// 	baller.set({checked_in_at: time.slice(0,4) + time.slice(7,10)});
+		// });
 		return jsonData
   },
 });
+
