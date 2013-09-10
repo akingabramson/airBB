@@ -1,0 +1,8 @@
+<script type="text/javascript">
+	<% if @court %>
+		window.intendedLocation = "/courts/<%=@court.id%>";
+		<% court_json = render 'show.rabl'%>
+		window.bootstrappedCourt = <%= court_json.html_safe%>;
+	<% end %>
+</script>
+

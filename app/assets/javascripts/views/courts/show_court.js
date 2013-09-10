@@ -27,7 +27,8 @@ AB.Views.ShowCourt = Backbone.View.extend({
 			success: function(createdCheckIn, response){
 				console.log("great success");
 				showView.trigger("checkInChange")
-				// have to add date to baller in UTC time, javascript is treating it oddly
+				
+				// had to add date to baller in UTC time, javascript was treating it oddly
 				// var checked_in_at = new Date(response.get("created_at"));
 				// checked_in_at.setHours(checked_in_at.getHours() + checked_in_at.getTimezoneOffset()/60);
 				// showView.currentCheckIn.set({"created_at": checked_in_at});

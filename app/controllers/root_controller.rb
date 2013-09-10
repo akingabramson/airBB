@@ -1,5 +1,5 @@
 class RootController < ApplicationController
-  layout "application"
+  # layout "application"
   def index
     
   end
