@@ -1,6 +1,6 @@
 class CheckInsController < ApplicationController
   def index
-    current_user.check_ins
+    render json: current_user.check_ins
   end
 
   def create

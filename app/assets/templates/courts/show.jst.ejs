@@ -8,8 +8,10 @@
 <h4>Current Ballers</h4>
 <ul>
 <% court.get("current_ballers").each(function(baller){ %>
-	<%var date = new Date(baller.escape('checked_in_at'));%>
-	<%var goodDate = new Date(date - date.getTimezoneOffset()*60000);%>
+	<%var date = new Date(baller.get('checked_in_at'));%>
+	<%var newDate = new Date(date - date.getTimezoneOffset()*60000) %>
+	<% debugger %>
+	<li>Name: <%=baller.escape('username')%> | Checked in at: <%=newDate.toLocaleTimeString()%></li>			
 <% }); %>
 </ul>
 
