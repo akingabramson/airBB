@@ -1,3 +1,2 @@
-AB.Models.CurrentBaller = Backbone.Model.extend({
-	
+AB.Models.CurrentBaller = Backbone.Model.extend({	
 })

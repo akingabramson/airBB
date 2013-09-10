@@ -1,2 +1,8 @@
 object @court
-attributes :name, :baller_count, :current_ballers
+attributes :name, :baller_count
+child :check_ins do
+	attributes :id, :created_at
+	child :user => :baller do
+    attributes :id, :username
+  end
+end

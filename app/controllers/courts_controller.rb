@@ -18,7 +18,7 @@ class CourtsController < ApplicationController
 
   def show
     @court = Court.find(params[:id]);
-    render 'show.rabl'
+    render :show, handlers: [:rabl]
     # use rabl
   end
 

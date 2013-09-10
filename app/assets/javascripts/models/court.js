@@ -25,7 +25,7 @@ AB.Models.Court = Backbone.Model.extend({
 	},
 	parse: function(jsonData){
 		jsonData.position = new google.maps.LatLng(jsonData.latitude, jsonData.longitude);
-		jsonData.current_ballers = new AB.Collections.CurrentBallers(jsonData.current_ballers)
+		jsonData.check_ins = new AB.Collections.CheckIns(jsonData.check_ins, {parse: true});
 		return jsonData
   },
 });
