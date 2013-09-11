@@ -15,10 +15,12 @@ class CourtsController < ApplicationController
   end
 
   def show
-    @court = Court.find(params[:id]);
     respond_to do |format|
-      format.html
-      format.json {render :show, handlers: [:rabl]}
+      format.html {render "root/index"}
+      format.json do 
+        @court = Court.find(params[:id]);
+        render :show, handlers: [:rabl] 
+      end
     end
   end
 

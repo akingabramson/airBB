@@ -1,20 +1,12 @@
-google address autocomplete
+google address autocomplete on main page
 
 button for auto refresh on/off
 
 clustering
 
-
-1. Events for mapmovestart/mapmoveend
-	a. get current bounds: gmap.getBounds returns GLatLngBounds
-	a. that's when you query server, get results back, put on map
 		
-
 2. List of "Home Courts" and who's there.
 
 3. On court submission, flag for review to check later.
 
-
-Court:
-	has_many checkins
-	has_many current_ballers through checkins
+4. Fix user load on court show fetch.

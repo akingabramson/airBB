@@ -4,8 +4,7 @@ class CheckInsController < ApplicationController
   end
 
   def create
-    @check_in = current_user.check_ins.new(params[:check_in])
-    if @check_in.save
+    if @check_in = current_user.check_ins.create(params[:check_in])
       render :show, handlers: [:rabl]
     else
       p @check_in.errors.full_messages

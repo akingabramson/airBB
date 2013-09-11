@@ -2,7 +2,7 @@
 <h2>Sign in</h2>
 <%= flash[:notice]%> 
 <%= flash[:alert]%>
-<%= @user.errors.full_messages if @user.errors.full_messages%>
+<%= @user.errors.full_messages if @user && @user.errors.full_messages%>
 
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
