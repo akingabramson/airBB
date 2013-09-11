@@ -14,6 +14,7 @@ AB.initialize = function() {
   } else {
     courts = new AB.Collections.Courts();
   }
+
   if (!!window.CURRENT_USER){
     AB.Store.CurrentUser = new AB.Models.CurrentUser(CURRENT_USER, {parse: true});
   } else {

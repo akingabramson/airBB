@@ -1,8 +1,9 @@
 AB.Routers.Main = Backbone.Router.extend({
 	routes: {
-		"": "main",
 		"courts/new": "newCourt",
 		"courts/:id": "show",
+		"_=_": "main",
+		"": "main",
 	},
 	initialize: function(options) {
 		this.$mapContainer = options.$mapContainer, this.$newCourtButton = options.$newCourtButton,
