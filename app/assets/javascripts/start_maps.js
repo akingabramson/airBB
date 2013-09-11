@@ -19,16 +19,16 @@ AB.checkGeo = function() {
                                       position.coords.longitude);
 
       AB.map.setCenter(AB.pos);
-      AB.Router.loadMain();
+      // AB.Router.loadMain();
     }, function() {
       AB.handleNoGeolocation(true);
-      AB.Router.loadMain();
+      // AB.Router.loadMain();
     }); 
 
   } else {
     // Browser doesn't support Geolocation
     AB.handleNoGeolocation(false);
-    AB.Router.loadMain();
+    // AB.Router.loadMain();
   }
 }
 

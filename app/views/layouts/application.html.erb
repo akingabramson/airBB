@@ -8,7 +8,9 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmvWtzGkXk7HeIcQEgRYV9qQRuh1uYY4k&libraries=places&sensor=true">
     </script>
     <script type="text/javascript">
-      CURRENT_USER = <%=current_user.jsonified if user_signed_in?%>;
+      <% if user_signed_in? %>
+        CURRENT_USER = <%=current_user.jsonified%>
+      <% end %>;
     </script>
 
   <%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery? %>
@@ -22,6 +24,10 @@
       <div class="span12">
         <% if user_signed_in? %>
           <div> <%= current_user.name %> </div>
+          <form action="/users/sign_out" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Sign Out">
+          </form>
         <% else %>
           <div><%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %></div>
         <% end %>

@@ -4,11 +4,10 @@ AirBB::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks",
                                        :sessions => 'sessions',
                                        :registrations => "registrations"}
-
-  root to: 'root#index'
-
   resources :courts, only: [:index, :create, :update, :show, :destroy]
   resources :check_ins, only: [:index, :create, :destroy]
+  
+  root to: 'root#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

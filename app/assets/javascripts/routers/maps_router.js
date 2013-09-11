@@ -9,14 +9,21 @@ AB.Routers.Main = Backbone.Router.extend({
 		this.$content = options.$content;
 		this.markersCollection = options.markersCollection;
 		this.$newCourtButton.on("click", this._flipContent.bind(this));
+		this.mapLoaded = false;
+		AB.startMap();
+		var router = this;
+		google.maps.event.addListenerOnce(AB.map, 'bounds_changed', function(){
+			router.mapLoaded = true;
+		});
 	},
 	
 	main: function(){
-		if (!!AB.map) {
-			this.loadMain();
+		if (!this.mapLoaded) {
+			// loading screen?
+			google.maps.event.addListenerOnce(AB.map, 'bounds_changed', this.loadMain.bind(this));
 		} else {
-			AB.startMap();
-		}
+			this.loadMain();	
+		}	
 	},
 
 	show: function(id) {

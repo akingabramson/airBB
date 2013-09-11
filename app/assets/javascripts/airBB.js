@@ -14,21 +14,22 @@ AB.initialize = function() {
   } else {
     courts = new AB.Collections.Courts();
   }
-
-  
-  AB.Store.CurrentUser = new AB.Models.CurrentUser(CURRENT_USER, {parse: true});
+  if (!!window.CURRENT_USER){
+    AB.Store.CurrentUser = new AB.Models.CurrentUser(CURRENT_USER, {parse: true});
+  } else {
+    AB.Store.CurrentUser = new AB.Models.CurrentUser()
+  }
 
   AB.Router = new AB.Routers.Main({$mapContainer: $(".map-container"),
 																	 $newCourtButton: $("#new-court-button"),
                                    $content: $("#content"),
                                     markersCollection: courts});
 
-  Backbone.history.start({silent: true, pushState: true});
+  Backbone.history.start({pushState: true});
 
-  AB.Router.navigate('/');
-  window.intendedLocation = window.intendedLocation || "#/";
-  AB.Router.navigate(window.intendedLocation, {trigger: true});
-  // AB.startMap();  
+  // AB.Router.navigate('/');
+  // window.intendedLocation = window.intendedLocation || "";
+  // AB.Router.navigate(window.intendedLocation, {trigger: true}); 
 }
 
 
