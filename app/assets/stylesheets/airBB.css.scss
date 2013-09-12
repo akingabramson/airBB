@@ -18,6 +18,8 @@ $map-height: 400px;
 	top: 0%;
 	z-index: 1;
 }
+#mapCanvas label { width: auto; display:inline; }
+#mapCanvas img { max-width: none; }
 
 #content {
 	position: absolute;
