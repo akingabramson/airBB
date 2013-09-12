@@ -29,10 +29,8 @@ AB.Routers.Main = Backbone.Router.extend({
 
 	show: function(id) {
 		var router = this;
-		var court = this.markersCollection.get(id);
-		if (!court) {
-			court = this.markersCollection.push({id: id})
-		}
+		court = this.markersCollection.findToFetch(id);
+		console.log(court)
 		court.fetch({
 			success: function() {
 				var showView = new AB.Views.ShowCourt({model:court})
@@ -41,7 +39,8 @@ AB.Routers.Main = Backbone.Router.extend({
 			error: function() {
 				
 			}
-		})
+		});
+		
 	},
 
 	newCourt: function() {
@@ -78,6 +77,7 @@ AB.Routers.Main = Backbone.Router.extend({
 	_flipContent: function(){
 		if (this.currentView) {
 			this._swapView(false);
+			if (!!this.mainView) {this.mainView.updateCollection()};
 			this.navigate("", {trigger: true});
 		} else {
 			this.navigate("courts/new", {trigger:true});

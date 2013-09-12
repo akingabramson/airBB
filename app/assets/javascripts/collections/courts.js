@@ -4,6 +4,6 @@ AB.Collections.Courts = Backbone.Collection.extend({
   _removeReference: function(model) {
   	model.positionMarker.setMap(null);
   	google.maps.event.removeListener(model.markerClickID);
-  }
+  },
 
 });

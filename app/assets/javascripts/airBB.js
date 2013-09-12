@@ -7,13 +7,7 @@ window.AB = {
 }
 
 AB.initialize = function() {
-  var courts;
-  if (window.bootstrappedCourt) {
-    var court = new AB.Models.Court(window.bootstrappedCourt);
-    courts = new AB.Collections.Courts([court]);
-  } else {
-    courts = new AB.Collections.Courts();
-  }
+  courts = new AB.Collections.Courts();
 
   if (!!window.CURRENT_USER){
     AB.Store.CurrentUser = new AB.Models.CurrentUser(CURRENT_USER, {parse: true});
@@ -25,7 +19,6 @@ AB.initialize = function() {
 																	 $newCourtButton: $("#new-court-button"),
                                    $content: $("#content"),
                                     markersCollection: courts});
-
   Backbone.history.start({pushState: true});
 
   // AB.Router.navigate('/');

@@ -40,8 +40,8 @@ class Court < ActiveRecord::Base
   #   CheckIn.joins(users: [:id, :username]).where(:court_id => id)
   # end
 
-  # def baller_count
-  #   active.count
-  # end
+  def baller_count
+    active.count
+  end
 
 end
