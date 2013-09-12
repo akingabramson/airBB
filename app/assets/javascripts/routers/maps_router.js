@@ -30,7 +30,6 @@ AB.Routers.Main = Backbone.Router.extend({
 	show: function(id) {
 		var router = this;
 		court = this.markersCollection.findToFetch(id);
-		console.log(court)
 		court.fetch({
 			success: function() {
 				var showView = new AB.Views.ShowCourt({model:court})

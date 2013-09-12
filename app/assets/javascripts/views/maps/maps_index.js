@@ -37,7 +37,7 @@ AB.Views.Main = Backbone.View.extend({
         console.log(view.collection)
       },
       error: function() {
-        alert("couldn't update");
+        console.log("couldn't update");
       }
     });
   }
