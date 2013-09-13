@@ -1,0 +1,14 @@
+<div id="airBB">AirBB</div>
+<div id="new-court-button-wrapper">
+  <button class="btn" id="new-court-button">New Court</button>
+  <% if user_signed_in? %>
+    <a id="current-username" href="#"><%= current_user.username%></a>
+    <form action="/users/sign_out" method="POST" id="logout">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="submit" class="logout-button btn" value="Sign Out">
+    </form>
+  <% else %>
+    <button href="/users/sign_in" class="btn btn-info sign-in-button">Sign In</button>
+    <button href="/users/sign_up" class="btn btn-info sign-up-button">Sign Up</button>
+  <% end %>
+</div>

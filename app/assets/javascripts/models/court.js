@@ -30,7 +30,7 @@ AB.Models.Court = Backbone.Model.extend({
 	    });
 
 			var court = this;
-	    this.markerClickID = google.maps.event.addListener(this.positionMarker, "click", function(){
+	    this.markerClickID = google.maps.event.addListener(this.positionMarker, "click", function(event){
 	    	AB.Router.navigate("courts/"+court.id, {trigger: true});
 	    });
 		}

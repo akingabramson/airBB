@@ -10,16 +10,7 @@ class CheckIn < ActiveRecord::Base
   belongs_to :court
   belongs_to :user
 
-  scope :active, where(expired: false)
-
-  def self.refresh
-    active.each do |check_in|
-      if Time.now.utc - check_in.created_at.utc > 60*EXPIRATION_MINUTES
-        check_in.expired = true
-        check_in.save
-      end
-    end
-  end
+  scope :active, where("check_ins.created_at > ?", Time.now - 60*EXPIRATION_MINUTES)
 
   def set_expired
     self.expired = false

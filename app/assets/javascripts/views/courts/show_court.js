@@ -1,5 +1,6 @@
 AB.Views.ShowCourt = Backbone.View.extend({
 	initialize: function(){
+		this.$el.attr("id", "court-show")
 		this.currentCheckIn = this.model.get("check_ins")._findCheckInByBallerId(AB.Store.CurrentUser.id)
 		this.on("checkInChange", this.render);
 		// bind?
