@@ -8,7 +8,9 @@
       <input type="submit" class="logout-button btn" value="Sign Out">
     </form>
   <% else %>
-    <button href="/users/sign_in" class="btn btn-info sign-in-button">Sign In</button>
-    <button href="/users/sign_up" class="btn btn-info sign-up-button">Sign Up</button>
+  <div style="overflow:hidden;">
+    <a href="/users/sign_in" class="btn btn-info sign-in-button">Sign In</a>
+    <a href="/users/sign_up" class="btn btn-info sign-up-button">Sign Up</a>
+  </div>
   <% end %>
 </div>

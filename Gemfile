@@ -15,10 +15,20 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'whenever', :require => false
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
-gem "pg"
+group :test do
+  gem 'faker'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'launchy'
+end
 
+
+
+gem "pg"
 gem "omniauth"
 gem "omniauth-facebook"
 gem "devise"

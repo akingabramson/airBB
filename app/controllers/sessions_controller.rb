@@ -1,5 +1,5 @@
 class SessionsController < Devise::SessionsController
-  layout "basic"
+  # layout "basic"
 
   # creating SESSION, not user
 

@@ -1,0 +1,35 @@
+#sign-in {
+	width: 50%; /*can be in percentage also.*/
+  height: auto;
+  margin: 50px auto;
+  padding: 10px;
+  position: relative;
+
+	background: rgb(85, 85, 85);
+	background: rgba(85, 85, 85, .93);
+	border: 2px solid;
+	border-radius: 25px;
+	font-family: "Gudea";
+	text-align: left;
+}
+
+#sign-in-container {
+	position: absolute;
+	top: 0%;
+	width: 100%;
+	height: 100%;
+	background: url("court_background.jpg") no-repeat center center fixed; 	
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  opacity: .87;
+}
+
+.normal-sign-in {
+	text-align: left;
+}
+
+input {
+	text-align: left;
+}
