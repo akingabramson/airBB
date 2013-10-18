@@ -1,4 +1,0 @@
-To do: 
-
---Number of courts per court location
---Court rating (condition?)

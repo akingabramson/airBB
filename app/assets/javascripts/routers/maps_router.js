@@ -12,6 +12,7 @@ AB.Routers.Main = Backbone.Router.extend({
 		this.$newCourtButton.on("click", this._flipContent.bind(this));
 		this.mapLoaded = false;
 		AB.startMap();
+
 		var router = this;
 		google.maps.event.addListenerOnce(AB.map, 'bounds_changed', function(){
 			router.mapLoaded = true;
@@ -21,6 +22,8 @@ AB.Routers.Main = Backbone.Router.extend({
 	main: function(){
 		if (!this.mapLoaded) {
 			// loading screen?
+			$("#throbber").removeClass("hidden")
+			// load throbber
 			google.maps.event.addListenerOnce(AB.map, 'bounds_changed', this.loadMain.bind(this));
 		} else {
 			this.loadMain();	
@@ -53,6 +56,7 @@ AB.Routers.Main = Backbone.Router.extend({
 	// called after map loads on main view
 	loadMain: function() {
 		var router = this;
+		$("#throbber").addClass("hidden")
 		if (!this.mainView) {
 			var bounds = AB.Store.getBounds();
 			var southwest = bounds[0], northeast = bounds[1];

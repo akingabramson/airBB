@@ -1,31 +1,31 @@
-<div id="backboard">
-	<h2 id="court-title"><%=court.escape("name")%></h2>
-	<% var count = court.get("check_ins").length%>
-	<h3 id="baller-count">
-		<% if (count == 1) { %> 
-			1 baller
-		<% } else { %>
-			<%=count%> ballers
-		<% } %>
-	</h3>
-</div>
-<div id="check-in-container">
-	<div class="sign-in-div">
-	<% if (AB.Store.CurrentUser.id) { %>
-		<% if (!!checkIn) { %>
-			<button class="btn btn-danger check-out-button">Check Out</button>
-		<% } else { %>
-			<button class="btn btn-primary check-in-button">Check In</button>
-		<% } %>
-	<% } else { %>
-		<a class="btn sign-in btn-info" href="/users/sign_in?redirect_url=/courts/<%=court.id%>">Sign In to Check In!</a>
-	<% } %>
+	<div id="backboard">
+		<h2 id="court-title"><%=court.escape("name")%></h2>
+		<% var count = court.get("check_ins").length%>
+		<h3 id="baller-count">
+			<% if (count == 1) { %> 
+				1 baller
+			<% } else { %>
+				<%=count%> ballers
+			<% } %>
+		</h3>
 	</div>
-	<ul class="check-in-list">
-	<% court.get("check_ins").each(function(courtCheckIn){ %>
-		<%var date = new Date(courtCheckIn.get('created_at'));%>
-		<%var newDate = new Date(date - date.getTimezoneOffset()*60000) %>
-		<li class="check-in-info">Name: <%=courtCheckIn.get('baller').get("username")%> | Checked in at: <%=date.toLocaleTimeString()%></li>			
-	<% }); %>
-	</ul>
-</div>
+	<div id="check-in-container">
+		<div class="sign-in-div">
+		<% if (AB.Store.CurrentUser.id) { %>
+			<% if (!!checkIn) { %>
+				<button class="btn btn-danger check-out-button">Check Out</button>
+			<% } else { %>
+				<button class="btn btn-primary check-in-button">Check In</button>
+			<% } %>
+		<% } else { %>
+			<a class="btn sign-in btn-info" href="/users/sign_in?redirect_url=/courts/<%=court.id%>">Sign In to Check In!</a>
+		<% } %>
+		</div>
+		<ul class="check-in-list">
+		<% court.get("check_ins").each(function(courtCheckIn){ %>
+			<%var date = new Date(courtCheckIn.get('created_at'));%>
+			<%var newDate = new Date(date - date.getTimezoneOffset()*60000) %>
+			<li class="check-in-info">Name: <%=courtCheckIn.get('baller').get("username")%> | Checked in at: <%=date.toLocaleTimeString()%> | <button class="btn btn-primary message-button" data-user-id="<%=courtCheckIn.get('baller').id%>">Message</button></li>
+		<% }); %>
+		</ul>
+	</div>

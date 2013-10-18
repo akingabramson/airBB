@@ -15,18 +15,13 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'whenever', :require => false
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'rspec-rails', '~> 2.0'
 end
 
 group :test do
-  gem 'faker'
+  gem 'rspec-rails', '~> 2.0'
   gem 'capybara'
-  gem 'guard-rspec'
-  gem 'launchy'
 end
-
-
 
 gem "pg"
 gem "omniauth"

@@ -1,6 +1,7 @@
 class Court < ActiveRecord::Base
   attr_accessible :latitude, :longitude, :name
   validates :name, presence: true, uniqueness: true
+  validates :longitude, presence: true
   validates :latitude, presence: true, uniqueness: {scope: :longitude}
 
   has_many :check_ins

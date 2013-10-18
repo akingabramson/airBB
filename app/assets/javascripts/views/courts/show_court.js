@@ -9,7 +9,8 @@ AB.Views.ShowCourt = Backbone.View.extend({
 	template: JST["courts/show"],
 	events: {
 		"click .check-in-button": "checkIn",
-		"click .check-out-button": "checkOut"
+		"click .check-out-button": "checkOut",
+		"click .message-button": "messageUser"
 	},
 
 	render: function() {
@@ -51,4 +52,9 @@ AB.Views.ShowCourt = Backbone.View.extend({
 			wait: true
 		});
 	},
+
+	messageUser: function(event) {
+		alert($(event.currentTarget).data("user-id"));
+		// Add message modal view here.
+	}
 })
