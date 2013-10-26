@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :provider, :uid, :name, :password, :password_confirmation, :email, :remember_me,
                   :username, :login
   validates :username, :uniqueness => {:case_sensitive => false}
+  
   has_many :check_ins
   has_many :checked_in_courts, through: :check_ins, source: :court
 
