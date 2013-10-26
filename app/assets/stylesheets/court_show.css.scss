@@ -2,11 +2,14 @@
   height: auto;
   margin: 5% 27%;
   padding: 2%;
-
 	background: rgb(85, 85, 85);
 	background: rgba(85, 85, 85, .93);
 	border: 2px solid;
 	border-radius: 25px;
+	-webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+
 }
 
 
